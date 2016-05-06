@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.margin-top-20{
+    margin-top:20px;
+}
+
+.header-img {
+    width:300px;
+    height: 150px;
+}
