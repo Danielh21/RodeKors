@@ -95,8 +95,6 @@ namespace Røde_Kors.Models
         [Required]
         public int telefon1 { get; set; }
 
-        public int telefon2 { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "Password")]
@@ -106,8 +104,32 @@ namespace Røde_Kors.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display (Name = "Er personen en vagtkoordinator?")]
+        public bool vagtkoordinator { get; set; }
+
+        [Display(Name = "Hvilket niveau er personen uddannet på? ")]
+        public level levelList { get; set; }
+
+        [Display (Name = "Chauffør")]
+        public bool driver { get; set; }
+
 
     }
+        public enum level
+        {
+            [Display(Name = "Observatør")]
+            Observatør,
+            [Display(Name = "Elev")]
+            Elev,
+            [Display(Name = "Team Samarit")]
+            TeamSamarit,
+            [Display(Name = "Team Leder")]
+            TeamLeder,
+            [Display(Name = "Medic")]
+            Medic,
+            [Display(Name = "Vagt Leder")]
+            Vagtleder
+        }
 
     public class ResetPasswordViewModel
     {

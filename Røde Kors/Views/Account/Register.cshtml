@@ -62,13 +62,6 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(m => m.telefon2, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.telefon2, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(m => m.CPR, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(m => m.CPR, new { @class = "form-control" })
@@ -80,6 +73,34 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.vagtkoordinator, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(m => m.vagtkoordinator, new {@class = "form-control" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.driver, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(m => m.driver, new { @class = "form-control" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.levelList, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EnumDropDownListFor(model => model.levelList, new { @class = "form-control" })
+            </div>
+
+
+        </div>
 
 
     <div class="form-group">

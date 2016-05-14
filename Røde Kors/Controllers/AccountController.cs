@@ -161,10 +161,25 @@ namespace Røde_Kors.Controllers
                     CO = model.CO,
                     CPR= model.CPR,
                     UserName = model.Email,
-                    Email = model.Email };
+                    telefon1 = model.telefon1,
+                    Email = model.Email,
+                    driver = model.driver,
+                    vagtkoordinator = model.vagtkoordinator,
+                    eduLevel = model.levelList.ToString()
+            };
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+
                 if (result.Succeeded)
                 {
+
+                    if (user.vagtkoordinator)
+                {
+                    // means that the user needs to be given the vagtkoordinator Role
+                    UserManager.AddToRole(user.Id, "Vagtkoordinator");
+                }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

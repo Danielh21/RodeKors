@@ -31,7 +31,13 @@ namespace Røde_Kors.Models
         [Required]
         public int telefon1 { get; set; }
 
-        public int telefon2 { get; set; }
+        [Required]
+        public bool vagtkoordinator {get; set; }
+
+        public bool driver { get; set; }
+
+        public string eduLevel { get; set; }
+
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
