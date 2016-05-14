@@ -151,7 +151,17 @@ namespace Røde_Kors.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                // Here to Add some that also should go to the database
+                var user = new ApplicationUser {
+                    firstName = model.firstName,
+                    lastName = model.lastName,
+                    streetAndNumber = model.streetAndNumber,
+                    city = model.city,
+                    zipcode = model.zipcode,
+                    CO = model.CO,
+                    CPR= model.CPR,
+                    UserName = model.Email,
+                    Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -12,7 +12,6 @@ namespace Røde_Kors.Models
     {
         [Required]
         public int userID { get; set; }
-
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int CPR { get; set; }
