@@ -13,5 +13,10 @@ namespace Røde_Kors.Controllers
         {
             return View();
         }
+
+        public ActionResult MyCalendar()
+        {
+            return View();
+        }
     }
 }

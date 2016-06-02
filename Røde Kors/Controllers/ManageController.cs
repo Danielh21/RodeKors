@@ -249,6 +249,7 @@ namespace Røde_Kors.Controllers
             return View();
         }
 
+
         //
         // POST: /Manage/SetPassword
         [HttpPost]

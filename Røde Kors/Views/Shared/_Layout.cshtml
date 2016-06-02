@@ -18,7 +18,12 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <!-- Here Goes links to Sites, and Controlers:
+
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Min Kalender", "MyCalendar", "Calendar")</li>
+                            <li>@Html.ActionLink("Min Profil", "EditUser", "Account")</li>
+                        }                        <!-- Here Goes links to Sites, and Controlers:
                         Like this: <li>@Html.ActionLink("LinkText", "actionName", "ControllerName" )
                         Exsample: <li>@Html.ActionLink("Home", "Index", "Home")</li>-->
                     </ul>

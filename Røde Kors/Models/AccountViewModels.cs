@@ -115,7 +115,61 @@ namespace Røde_Kors.Models
 
 
     }
-        public enum level
+
+    public class EditViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Fornavn ")]
+        public string firstName { get; set; }
+
+        [Required]
+        [Display(Name = "Efternavn")]
+        public string lastName { get; set; }
+
+        [Required]
+        public int CPR { get; set; }
+
+        [Display(Name = "C/O")]
+        public string CO { get; set; }
+
+        [Display(Name = "Adresse")]
+        public string streetAndNumber { get; set; }
+
+        [Display(Name = "Postnumber")]
+        public int zipcode { get; set; }
+
+        [Display(Name = "By")]
+        public string city { get; set; }
+
+        [Required]
+        public int telefon1 { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Er personen en vagtkoordinator?")]
+        public bool vagtkoordinator { get; set; }
+
+        [Display(Name = "Hvilket niveau er personen uddannet på? ")]
+        public level levelList { get; set; }
+
+        [Display(Name = "Chauffør")]
+        public bool driver { get; set; }
+
+
+    }
+    public enum level
         {
             [Display(Name = "Observatør")]
             Observatør,

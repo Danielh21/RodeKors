@@ -134,6 +134,11 @@ namespace Røde_Kors.Controllers
             }
         }
 
+        public ActionResult EditUser()
+        {
+            return View();
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
