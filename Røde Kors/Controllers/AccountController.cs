@@ -133,9 +133,62 @@ namespace Røde_Kors.Controllers
                     return View(model);
             }
         }
-
+        
+        //
+        // GET: /Account/EditUser
         public ActionResult EditUser()
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            EditViewModel viewModel = new EditViewModel();
+            viewModel.firstName = user.firstName;
+            viewModel.lastName = user.lastName;
+            viewModel.CPR = user.CPR;
+            viewModel.streetAndNumber = user.streetAndNumber;
+            viewModel.city = user.city;
+            viewModel.telefon1 = user.telefon1;
+            viewModel.zipcode = user.zipcode;
+            viewModel.CO = user.CO;
+            viewModel.Email = user.Email;
+            viewModel.driver = user.driver;
+            viewModel.vagtkoordinator = user.vagtkoordinator;
+            viewModel.eduLevel = user.eduLevel;
+
+            return View(viewModel);
+        }
+
+        //
+        // POST: /Account/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(EditViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                ApplicationUser OrgiUser = UserManager.FindById(User.Identity.GetUserId());
+                OrgiUser.firstName = model.firstName;
+                OrgiUser.lastName = model.lastName;
+                OrgiUser.streetAndNumber = model.streetAndNumber;
+                OrgiUser.city = model.city;
+                OrgiUser.zipcode = model.zipcode;
+                OrgiUser.CO = model.CO;
+                OrgiUser.CPR = model.CPR;
+                OrgiUser.Email = model.Email;
+                OrgiUser.telefon1 = model.telefon1;
+                OrgiUser.vagtkoordinator = model.vagtkoordinator;
+
+                if (OrgiUser.vagtkoordinator)
+                {
+                    // means that the user needs to be given the vagtkoordinator Role
+                    UserManager.AddToRole(OrgiUser.Id, "Vagtkoordinator");
+                }
+
+                IdentityResult result = await UserManager.UpdateAsync(OrgiUser);
+                return View();
+            }
+            
+            ViewBag.Message = "Succesful updated the data";
+
             return View();
         }
 

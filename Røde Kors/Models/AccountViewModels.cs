@@ -149,20 +149,11 @@ namespace Røde_Kors.Models
         [Required]
         public int telefon1 { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
         [Display(Name = "Er personen en vagtkoordinator?")]
         public bool vagtkoordinator { get; set; }
 
-        [Display(Name = "Hvilket niveau er personen uddannet på? ")]
-        public level levelList { get; set; }
+        [Display(Name = "Du er uddannet som: ")]
+        public string eduLevel { get; set; }
 
         [Display(Name = "Chauffør")]
         public bool driver { get; set; }
