@@ -1,9 +1,29 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-}
 
+}
+@using Røde_Kors.Extensions
 <div class="center-block">
 
+
+
+    @{ 
+
+    if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <h2> Hello @User.Identity.GetFirstName() </h2>
+
+            var createdUserMessage = TempData["createdUsermessage"];
+
+            if (TempData["createdUsermessage"] != null)
+            {
+                <script type="text/javascript">
+                    alert('@TempData["createdUsermessage"] ');
+                </script>
+            }
+
+        }
+        else {
 <div class="row">
 
     <div class="col-md-4 margin-top-20 col-md-offset-4">
@@ -14,4 +34,6 @@
     </div>
 
 </div>
+    }
+    }
 </div>

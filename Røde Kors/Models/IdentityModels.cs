@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 
 namespace Røde_Kors.Models
 {
@@ -45,6 +46,9 @@ namespace Røde_Kors.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("FirstName", this.firstName));
+            userIdentity.AddClaim(new Claim("LastName", this.lastName));
+            userIdentity.AddClaim(new Claim("eduLevel", this.eduLevel));
             return userIdentity;
             }
 

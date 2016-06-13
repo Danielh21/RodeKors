@@ -19,14 +19,37 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
 
-                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Min Kalender", "MyCalendar", "Calendar")</li>
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <li>@Html.ActionLink("Min Kalender", "MyCalendar", "Calendar")</li>
                             <li>@Html.ActionLink("Min Profil", "EditUser", "Account")</li>
-                        }                        <!-- Here Goes links to Sites, and Controlers:
-                        Like this: <li>@Html.ActionLink("LinkText", "actionName", "ControllerName" )
-                        Example: <li>@Html.ActionLink("Home", "Index", "Home")</li>-->
-                    </ul>
+                            
+    }
+
+    @if (HttpContext.Current.User.IsInRole("Vagtkoordinator"))
+    {
+            <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Koordinator opgaver
+                <span class="caret"></span>
+            </a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Opret Ny Bruger", "Register", "Account")</li>
+                    <li>hello</li>
+                    <li>Item</li>
+                </ul>
+            </li>
+                
+    }
+
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <li>@Html.Partial("_LoginPartial")</li>
+}
+                <!-- Here Goes links to Sites, and Controlers:
+                Like this: <li>@Html.ActionLink("LinkText", "actionName", "ControllerName" )
+                Example: <li>@Html.ActionLink("Home", "Index", "Home")</li>-->
+    </ul>
                 </div>
             </div>
         </div>

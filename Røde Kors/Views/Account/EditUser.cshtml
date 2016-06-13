@@ -1,4 +1,5 @@
 ﻿@model Røde_Kors.Models.EditViewModel
+    @using Røde_Kors.Extensions
 
 @{
     ViewBag.Title = "EditUser";
@@ -108,14 +109,15 @@
                 </div>
             </div>
         </div>
-
-        @if(Model != null)
         {
 
         <div class="col-md-10" >
-            Dit Uddannelses Niveau er:<font color="Green">@Model.eduLevel </font>
+            @{ 
+                var edu = User.Identity.GeteduLevel();
+            }
+            Dit Uddannelses Niveau er:<font color="Green">@edu </font>
         </div>
-        }
+        
         
 
             <div class="form-group">

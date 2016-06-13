@@ -133,7 +133,8 @@ namespace Røde_Kors.Controllers
                     return View(model);
             }
         }
-        
+
+
         //
         // GET: /Account/EditUser
         public ActionResult EditUser()
@@ -194,7 +195,7 @@ namespace Røde_Kors.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Vagtkoordinator")]
         public ActionResult Register()
         {
             return View();
@@ -203,7 +204,7 @@ namespace Røde_Kors.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Vagtkoordinator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -238,8 +239,10 @@ namespace Røde_Kors.Controllers
                     // means that the user needs to be given the vagtkoordinator Role
                     UserManager.AddToRole(user.Id, "Vagtkoordinator");
                 }
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    TempData["createdUsermessage"] = "The user " + @user.firstName + " " + @user.lastName + " has been created";
+
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
