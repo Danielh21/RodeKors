@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Røde_Kors
 {
@@ -26,6 +25,17 @@ namespace Røde_Kors
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+                                        "~/Scripts/fullcalendar.js"));
+
+            bundles.Add(new StyleBundle("~/Content/fullcalendar").Include(
+           "~/Content/fullcalendar.css",
+           "~/Content/fullcalendar.print.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/moment.min.js"));
         }
     }
 }

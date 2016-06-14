@@ -13,8 +13,7 @@
     {
         <h2> Hello @User.Identity.GetFirstName() </h2>
 
-            var createdUserMessage = TempData["createdUsermessage"];
-
+           //This is to display to an admin that an user has been created
             if (TempData["createdUsermessage"] != null)
             {
                 <script type="text/javascript">

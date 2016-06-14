@@ -4,9 +4,60 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MyCalendar</h2>
+
+<script>
+    $(document).ready(function () {
+
+        // page is now ready, initialize the calendar...
+    
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+
+            contentHeight: 450,
+            firstDay: 1,
+
+            events: [
+       {
+           start: "2016-06-16",
+           allDay: true,
+           color: "green"
+
+       },
+       {
+           start: '2016-06-15',
+           allDay: true,
+           color: "green"
+       }
+
+            ] 
+        })
+
+        }); </script>
+
+<h2> Min Kalender</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8">
+            <div id='calendar'>
+            </div>
+        </div>
+        <div class="col-xs-4 text-center">
+            <br / >
+            <br / >
+            <p> Her er din vagt kalender.</p>
+            <p> Tryk på felterne får at melde fra eller til.</p>
+            <p> Grøn betyder at du er ledig og rød betyder at du ikke er ledig.</p>
+        </div>
+    </div>
+</div>
 
 
-<h2>
-    Inspriation: 
-    http://www.learningjquery.com/2015/03/14-top-calendar-and-date-picker-jquery-plugins</h2>
+@*<h2 > Inspriation: http://www.learningjquery.com/2015/03/14-top-calendar-and-date-picker-jquery-plugins</h2 >
+
+    https://onallthingsweb.wordpress.com/2013/02/11/using-jquery-fullcalendar-with-asp-net-mvc-and-entity-framework/
+
+    blog.falafel.com/three-steps-use-jquery-ui-asp-net-mvc-5/
+
+    http://fullcalendar.io/docs/event_data/events_function/
+
+*@
