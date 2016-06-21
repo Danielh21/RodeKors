@@ -39,6 +39,8 @@ namespace Røde_Kors.Models
 
         public string eduLevel { get; set; }
 
+        public VagtKalender calendar { get; set; }
+
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

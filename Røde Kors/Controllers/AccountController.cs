@@ -225,6 +225,7 @@ namespace Røde_Kors.Controllers
                     driver = model.driver,
                     vagtkoordinator = model.vagtkoordinator,
                     eduLevel = model.levelList.ToString()
+                    
             };
 
 

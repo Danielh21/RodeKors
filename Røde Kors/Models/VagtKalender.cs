@@ -7,6 +7,9 @@ namespace Røde_Kors.Models
 {
     public class VagtKalender
     {
-        List<VagtDag> dage { get; set; }
+        public int kalenderid { get; set; }
+
+        public Dictionary<String, bool> kalender {get; set;}
     }
+
 }

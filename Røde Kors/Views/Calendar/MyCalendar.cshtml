@@ -1,38 +1,94 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "MyCalendar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<script>
+
+<script type="text/javascript">
     $(document).ready(function () {
 
         // page is now ready, initialize the calendar...
-    
+
+
+
         $('#calendar').fullCalendar({
             // put your options and callbacks here
+
+
 
             contentHeight: 450,
             firstDay: 1,
 
-            events: [
-       {
-           start: "2016-06-16",
-           allDay: true,
-           color: "green"
 
-       },
-       {
-           start: '2016-06-15',
-           allDay: true,
-           color: "green"
-       }
 
-            ] 
+
+            dayClick: function (date, jsEvent, view) {
+
+
+                // need to use callback functions with AJAX.
+                // But havn't found the solution just yet.
+                function getColor() {
+                    return $.ajax({
+                        type: "post",
+                        url: '@Url.Action("testing","Calendar")',
+                        data: {
+                            date: clicked
+                        }
+                    })
+                }
+
+                function handleColor(color) {
+                    if (color == "red") {
+                        cell.css('background-color', 'red');
+                    }
+                    else {
+                        $(this).css('background-color', 'green');
+                    }
+                }
+
+                var clicked = date.format();
+                var cell = $(this);
+                var color = getColor().done;
+
+
+
+                getColor().done(handleColor);
+
+                //$(this).css('background-color', 'green');
+                //$(this).css('background-color', 'red');
+
+            },
+
+            dayRender: function (date, cell) {
+
+                function getAvaliblity(){
+                    return  $.ajax({
+                        type: "post",
+                        url: '@Url.Action("Avalibilty","Calendar")',
+                        data: {
+                            date: formattedDate
+                        }
+                    })
+                }
+
+                function handleCell(ava) {
+                    if (ava) {
+                        cell.css('background-color', 'green');
+                    }
+                    else {
+                        cell.css('background-color', 'red');
+                    }
+                }
+
+                var formattedDate = date.format();
+                var checkAvalible = getAvaliblity().done;
+
+                getAvaliblity().done(handleCell);
+
+            }
         })
-
-        }); </script>
+    }); </script>
 
 <h2> Min Kalender</h2>
 <div class="container">
@@ -51,6 +107,9 @@
     </div>
 </div>
 
+@section scripts{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    }
 
 @*<h2 > Inspriation: http://www.learningjquery.com/2015/03/14-top-calendar-and-date-picker-jquery-plugins</h2 >
 

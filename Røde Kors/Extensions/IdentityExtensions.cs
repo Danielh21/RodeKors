@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Røde_Kors.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
