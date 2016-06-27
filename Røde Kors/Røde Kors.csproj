@@ -210,10 +210,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CalenderHelper.cs" />
     <Compile Include="Models\MyDBContext.cs" />
     <Compile Include="Models\MyUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\VagtDag.cs" />
     <Compile Include="Models\VagtKalender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

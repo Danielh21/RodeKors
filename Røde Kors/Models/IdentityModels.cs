@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Principal;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Røde_Kors.Models
 {
@@ -39,9 +41,12 @@ namespace Røde_Kors.Models
 
         public string eduLevel { get; set; }
 
-        public VagtKalender calendar { get; set; }
+        public virtual ICollection<VagtDag> VagtDage { get; set; }
 
-
+        // Dictoinary is not supported by Entity, but we need it
+        // for looking up. See method that converts VagtDage to calendar
+        [NotMapped]
+        public virtual Dictionary<string,bool> calendarDic { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -53,6 +58,25 @@ namespace Røde_Kors.Models
             userIdentity.AddClaim(new Claim("eduLevel", this.eduLevel));
             return userIdentity;
             }
+
+
+        // Method that takes the ICollection VagtDage, and converts it to an Dictionary
+        // with the prob. dag as Key and the prob. Avalible as Value
+        public Dictionary<string, bool> createDictionary()
+        {
+            if(calendarDic == null)
+            {
+                calendarDic = new Dictionary<string, bool>();
+            }
+
+            foreach(VagtDag dag in VagtDage)
+            {
+                calendarDic.Add(dag.dag, dag.avalible);
+            }
+
+            return calendarDic;
+
+        }
 
     }
 

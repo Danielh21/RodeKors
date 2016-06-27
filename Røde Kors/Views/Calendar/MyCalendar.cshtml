@@ -25,38 +25,31 @@
 
             dayClick: function (date, jsEvent, view) {
 
-
-                // need to use callback functions with AJAX.
-                // But havn't found the solution just yet.
-                function getColor() {
+                function getResult() {
                     return $.ajax({
                         type: "post",
-                        url: '@Url.Action("testing","Calendar")',
+                        url: '@Url.Action("clcikedcell", "Calendar")',
                         data: {
                             date: clicked
                         }
                     })
-                }
 
-                function handleColor(color) {
-                    if (color == "red") {
-                        cell.css('background-color', 'red');
-                    }
-                    else {
-                        $(this).css('background-color', 'green');
-                    }
                 }
-
                 var clicked = date.format();
                 var cell = $(this);
-                var color = getColor().done;
+                
+
+                getResult().done(function (result) {
+                    if (result) {
+                        cell.css('background-color', 'green');
+                    }
+                    else {
+                        cell.css('background-color', 'red');
+                    }
+
+                })
 
 
-
-                getColor().done(handleColor);
-
-                //$(this).css('background-color', 'green');
-                //$(this).css('background-color', 'red');
 
             },
 
@@ -65,26 +58,23 @@
                 function getAvaliblity(){
                     return  $.ajax({
                         type: "post",
-                        url: '@Url.Action("Avalibilty","Calendar")',
+                        url: '@Url.Action("loadcell","Calendar")',
                         data: {
                             date: formattedDate
                         }
                     })
                 }
 
-                function handleCell(ava) {
+                var formattedDate = date.format();
+
+                getAvaliblity().done(function (ava) {
                     if (ava) {
                         cell.css('background-color', 'green');
                     }
                     else {
                         cell.css('background-color', 'red');
                     }
-                }
-
-                var formattedDate = date.format();
-                var checkAvalible = getAvaliblity().done;
-
-                getAvaliblity().done(handleCell);
+                });
 
             }
         })
