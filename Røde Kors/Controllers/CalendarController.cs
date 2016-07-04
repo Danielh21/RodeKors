@@ -79,8 +79,6 @@ namespace Røde_Kors.Controllers
                 }
                 Calendar[date] = false;
                 await manager.UpdateAsync(user);
-                var cot = store.Context;
-                cot.SaveChanges();
                 Session["Calendar"] = Calendar;
                 return Json(false);
 

@@ -10,6 +10,9 @@ namespace Røde_Kors
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+                        "~/Scripts/jquery-ui-1.11.1.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -22,20 +25,38 @@ namespace Røde_Kors
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+                                        "~/Scripts/fullcalendar.js"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                "~/Scripts/moment.js",
+                "~/Scripts/moment.min.js",
+                "~/Scripts/moment-with-locales.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
+               "~/Scripts/bootstrap-datetimepicker.min.js"));
+
+
+           
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-
-            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
-                                        "~/Scripts/fullcalendar.js"));
 
             bundles.Add(new StyleBundle("~/Content/fullcalendar").Include(
            "~/Content/fullcalendar.css",
            "~/Content/fullcalendar.print.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
-                "~/Scripts/moment.js",
-                "~/Scripts/moment.min.js"));
+            bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+              "~/Content/themes/base/all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datetimepicker/css").Include(
+             "~/Content/bootstrap-datetimepicker.min.css"));
+
+
+
+
         }
     }
 }

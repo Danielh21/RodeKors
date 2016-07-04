@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/fullcalendar.css")
+   
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/fullcalendar")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fullcalendar.css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/datetimepicker/css")
 
-    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-    <script src='lib/jquery.min.js'></script>
-    <script src='lib/moment.min.js'></script>
-    <script src='fullcalendar/fullcalendar.js'></script>
 
 
 
@@ -47,7 +48,7 @@
             </a>
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("Opret Ny Bruger", "Register", "Account")</li>
-                    <li>hello</li>
+                    <li>@Html.ActionLink("Opret Nyt Vagtkort", "NewVagtkortStart", "VagtKort")</li>
                     <li>Item</li>
                 </ul>
             </li>

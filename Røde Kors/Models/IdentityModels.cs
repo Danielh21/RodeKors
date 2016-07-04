@@ -91,5 +91,9 @@ namespace Røde_Kors.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Røde_Kors.Models.Rekvirent> Rekvirents { get; set; }
+
+        public System.Data.Entity.DbSet<Røde_Kors.Models.VagtKort> VagtKorts { get; set; }
     }
 }

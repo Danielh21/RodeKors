@@ -1,0 +1,173 @@
+﻿@model Røde_Kors.Models.VagtKort
+    @using Røde_Kors.Models
+
+@{
+    ViewBag.Title = "NewVagtKortStart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+
+    $(document).ready(function () {
+        
+
+        function findRekvirent(selected) {
+            return $.ajax({
+                type: "post",
+                url: '@Url.Action("findRekvirent", "VagtKort")',
+                data: {
+                    id: selected
+                }
+            })
+        }
+
+        $('#Rekvirent').change(function () {
+            var selected = $('#Rekvirent').val(); // this gives the id
+            if (selected != "") {
+
+                findRekvirent(selected).done(function (rek) {
+                    var obj = JSON.parse(rek) // this gives us an Javascript Object 
+                    $('#RekvirentKontaktPerson').val(obj.Kontaktperson);
+                    $('#RekvirentKontaktPersonDetajler').val(obj.KontaktDetaljer);
+                    $('#VagtAdresse').val(obj.Adresse);
+                })
+                
+            }
+
+        })
+        $(function () {
+            $('#VagtStart').datetimepicker({
+                locale: 'da',
+                
+            });
+
+            $('#VagtSlut').datetimepicker({
+                locale: 'da',
+                useCurrent: false
+
+            });
+
+            $('#ArregmenetSlut').datetimepicker({
+                useCurrent: false,
+                locale: 'da'
+            });
+
+            $("#VagtStart").on("dp.change", function (e) {
+                $('#VagtSlut').data("DateTimePicker").minDate(e.date);
+            });
+
+            $("#VagtSlut").on("dp.change", function (e) {
+                $('#VagtStart').data("DateTimePicker").maxDate(e.date);
+            });
+
+            $("#VagtStart").on("dp.change", function (e) {
+                $('#ArregmenetSlut').data("DateTimePicker").minDate(e.date);
+            });
+
+            $("#ArregmenetSlut").on("dp.change", function (e) {
+                $('#VagtStart').data("DateTimePicker").maxDate(e.date);
+            });
+
+
+        })
+        
+    })
+
+</script>
+
+<h2>Opret et Nyt VagtKort Her</h2>
+
+
+
+                        @{ 
+                            ApplicationDbContext context = new ApplicationDbContext();
+                            var listofRekvirents = context.Rekvirents.ToList();
+                        }
+               
+    <div class="text-center">
+        
+        <button class="btn" type="button">@Html.ActionLink("Opret Ny Rekvirant","CreateRekvirant", "VagtKort")</button>
+           
+    </div>
+                        <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Rekvirent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Rekvirent, new SelectList(listofRekvirents, "revkirentId", "RekvirantNavn"),"Vælg Rekvirent")
+                    @Html.ValidationMessageFor(model => model.Rekvirent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.VagtNavn, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VagtNavn, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VagtNavn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VagtStart, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VagtStart, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VagtStart, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VagtSlut, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VagtSlut, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VagtSlut, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ArregmenetSlut, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ArregmenetSlut, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ArregmenetSlut, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RekvirentKontaktPerson, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RekvirentKontaktPerson, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RekvirentKontaktPerson, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RekvirentKontaktPersonDetajler, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RekvirentKontaktPersonDetajler, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RekvirentKontaktPersonDetajler, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VagtAdresse, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VagtAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VagtAdresse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Næste" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+
+
+}
