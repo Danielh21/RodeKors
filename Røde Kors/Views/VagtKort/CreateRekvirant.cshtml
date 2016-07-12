@@ -11,41 +11,98 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
         <h4>Rekvirent</h4>
         <hr />
+    <div class="form-horizontal">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+
+
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.RekvirantNavn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.RekvirantNavn, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.RekvirantNavn, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RekvirantNavn, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Kontaktperson, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Kontaktperson, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Kontaktperson, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Kontaktperson, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.KontaktDetaljer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.KontaktDetaljer, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.KontaktDetaljer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.KontaktDetaljer, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
-            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sted, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Sted, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Sted, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Adresse, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Adresse, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PostnummerBy, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.PostnummerBy, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PostnummerBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
         </div>
+                <div class="col-lg-6">
+
+                    <div class="col-lg-12 row">
+                        @Html.LabelFor(model => model.StandardLevering, htmlAttributes: new { @class = "col-lg-6 text-left", style = "padding-left:0px" })
+
+                    </div>
+
+                    <div class="col-lg-12 row">
+
+                        @Html.TextAreaFor(model => model.StandardLevering, htmlAttributes: new { @class = "col-lg-6", rows = "5", style = "padding-left:5px" })
+                        @Html.ValidationMessageFor(model => model.StandardLevering, "", new { @class = "text-danger" })
+
+
+                    </div>
+
+                    <div class="col-lg-12 row">
+                        @Html.LabelFor(model => model.StandardForplejning, htmlAttributes: new { @class = "col-lg-6 text-left", style = "padding-left:0px" })
+
+                    </div>
+
+                    <div class="col-lg-12 row">
+
+                        @Html.TextAreaFor(model => model.StandardForplejning, htmlAttributes: new { @class = "col-lg-6", rows = "5", style = "padding-left:5px" })
+                        @Html.ValidationMessageFor(model => model.StandardLevering, "", new { @class = "text-danger" })
+
+                    </div>
+
+
+                </div>
+                </div>
+            </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -1,0 +1,141 @@
+﻿@model Røde_Kors.Models.VagtKort
+
+@{
+    ViewBag.Title = "ConfirmVagtkort";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+
+    $(document).ready(function () {
+
+        /*
+        Based on the size of the incomming text, the field needs to be resized!
+        after the dokument is loaded the fields needs to be set to un-editable!
+        */
+        $('#kommentarFelt').attr("contenteditable", "false")
+        $('#Rekvirentfelt').attr("contenteditable", "false")
+        $('#RødeKorsMaterialer').attr("contenteditable", "false")
+        $('#RekvirentMaterialer').attr("contenteditable", "false")
+
+    })
+    
+</script>
+<div class="container-fluid">
+
+    <div class="row" style="padding-left: 50px;">
+
+    <h2 >
+        @Html.DisplayFor(model => model.VagtNavn) - VagtKort
+    </h2>
+    </div>
+    <hr style="padding:0px;"/>
+
+    <div class="row">
+
+        <div id="leftsideDiv" class="col-lg-7 col-lg-offset-1">
+
+
+              <font size="3" face="verdana" >@Model.VagtStart.Date.ToString("dd. MMMM yyyy")
+              <br />
+               @Model.VagtSted <br />
+               @Model.VagtAdresse <br />
+               @Model.VagtPostnumberBy  
+              </font>
+            <br />
+                  <br />
+          <font size="2">
+              @Html.LabelFor(model => model.VagtStart) @Model.VagtStart.ToString(" HH:mm - dd. MMMM yyyy ")     
+            <br />
+                  @Html.LabelFor(model => model.VagtSlut) @Model.VagtSlut.ToString(" HH:mm - dd. MMMM yyyy ")   
+            <br />
+                  @Html.LabelFor(model => model.ArregmenetSlut) @Model.ArregmenetSlut.ToString(" HH:mm - dd. MMMM yyyy ")  
+           </font>  
+              <hr />
+
+            @Html.LabelFor(model => model.AntalVagtleder) - @Html.ValueFor(model => model.AntalVagtleder)
+            <hr />
+            @Html.LabelFor(model => model.AntalMedics) - @Html.ValueFor(model => model.AntalMedics)
+            <hr />
+            @Html.LabelFor(model => model.AntalTeamLeder) -  @Html.ValueFor(model => model.AntalTeamLeder)
+            <hr />
+            @Html.LabelFor(model => model.AntalTeamSamarit) - @Html.ValueFor(model => model.AntalTeamSamarit)
+            <hr />
+            @Html.LabelFor(model => model.AntalElev) - @Html.ValueFor(model => model.AntalElev)
+            <hr />
+            @Html.LabelFor(model => model.AntalObs) - @Html.ValueFor(model => model.AntalObs) 
+            <hr />
+
+                
+
+        </div>
+
+        <div id="Rightside Div" class="col-lg-3">
+
+            <div class="row">
+                @Html.LabelFor(model => model.RekvirentKontaktPerson)
+            </div>
+            <div class="row">
+
+                <div id="Rekvirentfelt" contenteditable="true" style="min-height:25px; background-color:lightgrey; width:400px; padding:5px; ">
+                    @Model.RekvirentKontaktPerson <br />
+                    @Model.RekvirentKontaktPersonDetajler
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                @Html.LabelFor(model => model.Kommentar)
+            </div>
+            <div class="row">
+
+                <div id="kommentarFelt" contenteditable="true" style="min-height:25px; background-color:lightgrey; width:400px; padding:5px; ">
+                   
+                    @Model.Kommentar
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                @Html.LabelFor(model => model.RødeKorsMaterialer)
+            </div>
+            <div class="row">
+
+                <div id="RødeKorsMaterialer" contenteditable="true" style="min-height:25px; background-color:lightgrey; width:400px; padding:5px; ">
+                    @Model.RødeKorsMaterialer
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                @Html.LabelFor(model => model.RekvirentMaterialer)
+            </div>
+            <div class="row">
+
+                <div id="RekvirentMaterialer" contenteditable="true" style="min-height:25px; background-color:lightgrey; width:400px; padding:5px; ">
+                    @Model.RekvirentMaterialer
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+        <div id="Button Row" class="row col-lg-offset-9" >
+               @Html.ActionLink("Opret Vagtkort","CreateVagtKort","VagtKort")
+        </div>
+
+
+
+
+
+        @*<dt>
+            @Html.DisplayFor(model => model.VagtNavn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VagtNavn)
+        </dd>*@
+
+</div>

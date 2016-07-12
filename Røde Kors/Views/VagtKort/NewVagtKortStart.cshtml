@@ -21,8 +21,8 @@
             })
         }
 
-        $('#Rekvirent').change(function () {
-            var selected = $('#Rekvirent').val(); // this gives the id
+        $('#Rekvirent_RekvirentId').change(function () {
+            var selected = $('#Rekvirent_RekvirentId').val(); // this gives the id
             if (selected != "") {
 
                 findRekvirent(selected).done(function (rek) {
@@ -30,6 +30,8 @@
                     $('#RekvirentKontaktPerson').val(obj.Kontaktperson);
                     $('#RekvirentKontaktPersonDetajler').val(obj.KontaktDetaljer);
                     $('#VagtAdresse').val(obj.Adresse);
+                    $('#VagtPostnumberBy').val(obj.PostnummerBy);
+                    $('#VagtSted').val(obj.Sted);
                 })
                 
             }
@@ -86,7 +88,7 @@
                
     <div class="text-center">
         
-        <button class="btn" type="button">@Html.ActionLink("Opret Ny Rekvirant","CreateRekvirant", "VagtKort")</button>
+        @Html.ActionLink("Opret Ny Rekvirant","CreateRekvirant", "VagtKort")
            
     </div>
                         <br />
@@ -97,67 +99,101 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-5">
             <div class="form-group">
-                @Html.LabelFor(model => model.Rekvirent, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Rekvirent, new SelectList(listofRekvirents, "revkirentId", "RekvirantNavn"),"Vælg Rekvirent")
-                    @Html.ValidationMessageFor(model => model.Rekvirent, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            
-            <div class="form-group">
-                @Html.LabelFor(model => model.VagtNavn, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.VagtNavn, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-6">
                     @Html.EditorFor(model => model.VagtNavn, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.VagtNavn, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VagtStart, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.VagtStart, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VagtStart, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VagtSlut, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.VagtSlut, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VagtSlut, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ArregmenetSlut, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.ArregmenetSlut, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ArregmenetSlut, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5">
             <div class="form-group">
-                @Html.LabelFor(model => model.VagtStart, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.VagtStart, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VagtStart, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.Rekvirent_RekvirentId, htmlAttributes: new { @class = "control-label col-md-6" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.Rekvirent_RekvirentId, new SelectList(listofRekvirents, "revkirentId", "RekvirantNavn"),"Vælg Rekvirent")
+                    @Html.ValidationMessageFor(model => model.Rekvirent_RekvirentId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.VagtSlut, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.VagtSlut, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VagtSlut, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RekvirentKontaktPerson, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.RekvirentKontaktPerson, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RekvirentKontaktPerson, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ArregmenetSlut, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ArregmenetSlut, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ArregmenetSlut, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.RekvirentKontaktPersonDetajler, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.RekvirentKontaktPersonDetajler, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RekvirentKontaktPersonDetajler, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.RekvirentKontaktPerson, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RekvirentKontaktPerson, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RekvirentKontaktPerson, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VagtSted, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.VagtSted, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VagtSted, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.RekvirentKontaktPersonDetajler, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RekvirentKontaktPersonDetajler, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RekvirentKontaktPersonDetajler, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VagtAdresse, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.VagtAdresse, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VagtAdresse, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.VagtAdresse, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.VagtAdresse, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.VagtAdresse, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VagtPostnumberBy, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.VagtPostnumberBy, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VagtPostnumberBy, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+
+            
+
+            
+
+           
+                
                 </div>
             </div>
 

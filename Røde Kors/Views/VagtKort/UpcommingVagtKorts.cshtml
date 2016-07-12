@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Røde_Kors.Models.VagtKort>
+
+@{
+    ViewBag.Title = "Kommende VagtKort";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kommende VagtKort</h2>
+
+<p>
+    @Html.ActionLink("Opret Nyt", "NewVagtKortStart")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VagtNavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VagtStart)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VagtNavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VagtStart)
+        </td>
+        <td>
+            @Html.ActionLink("Se VagtKort", "ViewVagtkort", new { id=item.VagtKortId }) |
+            @Html.ActionLink("Fordel Samariter", "AssignUsers", new { id=item.VagtKortId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.VagtKortId })
+        </td>
+    </tr>
+}
+
+</table>

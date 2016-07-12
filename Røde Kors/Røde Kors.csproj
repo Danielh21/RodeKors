@@ -484,7 +484,11 @@
     <Content Include="Views\VagtKort\ListOfRekvirant.cshtml" />
     <Content Include="Views\VagtKort\CreateRekvirant.cshtml" />
     <Content Include="Views\VagtKort\NewVagtKortStart.cshtml" />
-    <Content Include="Views\VagtKort\NewVagtKort2.cshtml" />
+    <Content Include="Views\VagtKort\NewVagtKortDetaljer.cshtml" />
+    <Content Include="Views\VagtKort\ConfirmVagtkort.cshtml" />
+    <Content Include="Views\VagtKort\UpcommingVagtKorts.cshtml" />
+    <Content Include="Views\VagtKort\CreateVagtKort.cshtml" />
+    <Content Include="Views\VagtKort\AssignUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
