@@ -218,12 +218,13 @@ namespace Røde_Kors.Controllers
                     city = model.city,
                     zipcode = model.zipcode,
                     CO = model.CO,
-                    CPR= model.CPR,
+                    CPR = model.CPR,
                     UserName = model.Email,
                     telefon1 = model.telefon1,
                     Email = model.Email,
-                    driver = model.driver,
+                    driver = model.driver.ToString(),
                     vagtkoordinator = model.vagtkoordinator,
+                    medic = model.medic,
                     eduLevel = model.levelList.ToString()
                     
             };

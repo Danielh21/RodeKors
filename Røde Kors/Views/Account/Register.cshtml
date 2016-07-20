@@ -84,10 +84,19 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.medic, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(m => m.medic, new { @class = "form-control" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.driver, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
 
-            @Html.EditorFor(m => m.driver, new { @class = "form-control" })
+            @Html.EnumDropDownListFor(m => m.driver, new { @class = "form-control" })
         </div>
 
     </div>

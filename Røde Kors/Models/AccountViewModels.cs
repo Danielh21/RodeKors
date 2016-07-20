@@ -107,11 +107,14 @@ namespace Røde_Kors.Models
         [Display (Name = "Er personen en vagtkoordinator?")]
         public bool vagtkoordinator { get; set; }
 
+        [Display (Name ="Er personen uddannet Medic?")]
+        public bool medic { get; set; }
+
         [Display(Name = "Hvilket niveau er personen uddannet på? ")]
         public level levelList { get; set; }
 
         [Display (Name = "Chauffør")]
-        public bool driver { get; set; }
+        public driverLevels driver { get; set; }
 
 
     }
@@ -156,7 +159,7 @@ namespace Røde_Kors.Models
         public string eduLevel { get; set; }
 
         [Display(Name = "Chauffør")]
-        public bool driver { get; set; }
+        public string driver { get; set; }
 
 
     }
@@ -168,13 +171,26 @@ namespace Røde_Kors.Models
             Elev,
             [Display(Name = "Team Samarit")]
             TeamSamarit,
-            [Display(Name = "Team Leder")]
-            TeamLeder,
-            [Display(Name = "Medic")]
-            Medic,
-            [Display(Name = "Vagt Leder")]
-            Vagtleder
+            [Display(Name = "Team Leder 1")]
+            TeamLeder1,
+            [Display(Name = "Team Leder 2")]
+            TeamLeder2,
+            [Display(Name = "Team Leder 3")]
+            TeamLeder3
         }
+
+    public enum driverLevels
+    {
+        [Display (Name = "Ikke Chauffør")]
+        IkkeChauffør,
+        [Display(Name ="Chaffør Normal Bil")]
+        Chauffør1,
+        [Display(Name = "Chaffør Stor Bil")]
+        Chauffør2,
+        [Display(Name = "Chaffør Stor Bil + Trailer")]
+        Chauffør3,
+
+    }
 
     public class ResetPasswordViewModel
     {

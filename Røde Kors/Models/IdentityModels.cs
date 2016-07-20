@@ -37,9 +37,11 @@ namespace Røde_Kors.Models
         [Required]
         public bool vagtkoordinator {get; set; }
 
-        public bool driver { get; set; }
+        public string driver { get; set; }
 
         public string eduLevel { get; set; }
+
+        public bool medic { get; set; }
 
         public int antalVagter { get; set; }
 

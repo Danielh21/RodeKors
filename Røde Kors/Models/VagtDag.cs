@@ -20,13 +20,13 @@ namespace Røde_Kors.Models
         {
 
         }
-
+        [Key, Column(Order =0)]
         [ ForeignKey("ApplicationUser")]
         public virtual string UserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 
-        [Key]
+        [Key, Column(Order =1)]
         public virtual string dag { get; set; }
         public virtual bool avalible { get; set; }
 
