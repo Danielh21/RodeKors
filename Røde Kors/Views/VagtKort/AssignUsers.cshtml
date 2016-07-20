@@ -13,11 +13,11 @@
 
         $(function () {
 
-            $("#VL").sortable({
+            $("#TL3").sortable({
                 connectWith: ".connectedSortable",
                 receive: function (event, ui) {
                     var cancelEv = true;
-                    if (ui.item.hasClass("1") || ui.item.hasClass("2")) {
+                    if (ui.item.hasClass("1")) {
                         cancelEv = false;
                     }
                     if (cancelEv) ui.sender.sortable("cancel");
@@ -33,7 +33,7 @@
                 connectWith: ".connectedSortable",
                 receive: function (event, ui) {
                     var cancelEv = true;
-                    if (ui.item.hasClass("2")) {
+                    if (ui.item.hasClass("8")) {
                         cancelEv=false;
                     }
                     if (cancelEv) ui.sender.sortable("cancel");
@@ -41,14 +41,25 @@
                 }
             }).disableSelection();
 
-            $("#TL").sortable({
+            $("#TL2").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("1") || ui.item.hasClass("2")) {
+                        cancelEv = false;
+                    }
+                    if(cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+            $("#TL1").sortable({
                 connectWith: ".connectedSortable",
                 receive: function (event, ui) {
                     var cancelEv = true;
                     if (ui.item.hasClass("1") || ui.item.hasClass("2") || ui.item.hasClass("3")) {
                         cancelEv = false;
                     }
-                    if(cancelEv) ui.sender.sortable("cancel");
+                    if (cancelEv) ui.sender.sortable("cancel");
                 }
             }).disableSelection();
 
@@ -102,13 +113,20 @@
         <div id="Left-side" class="col-lg-5">
 
 
-            @Html.LabelFor(model => model.AntalVagtleder) - @Html.ValueFor(model => model.AntalVagtleder)
+            @Html.LabelFor(model => model.AntalTeamLeder3) - @Html.ValueFor(model => model.AntalTeamLeder3)
             <br />
             
-           <ul multiple id="VL" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
-               @foreach (ApplicationUser u in Model.Vagtleder)
+           <ul multiple id="TL3" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+               @foreach (ApplicationUser u in Model.TeamLeder3)
                {
-                   <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter </li>
+                   var extraClass = 0;
+                   //Check to see if person is a medic!
+                   if (u.medic == true)
+                   {
+                       extraClass = 8;
+                   }
+
+                <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
                }
            </ul>
             <br />
@@ -120,19 +138,50 @@
                 <ul multiple id="Medic" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
                     @foreach (ApplicationUser u in Model.Medics)
                     {
-                        <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                        var extraClass = 0;
+                        //Check to see if person is a medic!
+                        if (u.medic == true)
+                        {
+                            extraClass = 8;
+                        }
+
+                        <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
                     }
                 </ul>
                 <br />
 
                 
 
-                    @Html.LabelFor(model => model.AntalTeamLeder) - @Html.ValueFor(model => model.AntalTeamLeder)
+                    @Html.LabelFor(model => model.AntalTeamLeder2) - @Html.ValueFor(model => model.AntalTeamLeder2)
                     <br />
-                    <ul multiple id="TL" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
-                        @foreach (ApplicationUser u in Model.Teamledere)
+                    <ul multiple id="TL2" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                        @foreach (ApplicationUser u in Model.TeamLeder2)
                         {
-                            <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter   </li>
+                            var extraClass = 0;
+                            //Check to see if person is a medic!
+                            if (u.medic == true)
+                            {
+                                extraClass = 8;
+                            }
+
+                            <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                        }
+                    </ul>
+                    <br />
+
+                    @Html.LabelFor(model => model.AntalTeamLeder1) - @Html.ValueFor(model => model.AntalTeamLeder1)
+                    <br />
+                    <ul multiple id="TL1" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                        @foreach (ApplicationUser u in Model.TeamLeder1)
+                        {
+                            var extraClass = 0;
+                            //Check to see if person is a medic!
+                            if (u.medic == true)
+                            {
+                                extraClass = 8;
+                            }
+
+                            <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
                         }
                     </ul>
                     <br />
@@ -144,7 +193,14 @@
                         <ul multiple id="TS" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
                             @foreach (ApplicationUser u in Model.TeamSamariter)
                             {
-                                <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                                var extraClass = 0;
+                                //Check to see if person is a medic!
+                                if (u.medic == true)
+                                {
+                                    extraClass = 8;
+                                }
+
+                                <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
                             }
                         </ul>
                         <br />
@@ -183,7 +239,15 @@
             <ul multiple class="list-unstyled connectedSortable" id="SamMulig" style="min-height:20px; background-color:lightgray">
                 @foreach(ApplicationUser u in ViewBag.listOfAvalible)
                 {
-                    <li value="@u.Id" class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                    var extraClass = 0;
+                    //Check to see if person is a medic!
+                    if (u.medic == true)
+                    {
+                        extraClass = 8;
+                    }
+
+
+                    <li value="@u.Id" class="ui-state-default @u.Rolenumber @extraClass"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
 
                 }
 

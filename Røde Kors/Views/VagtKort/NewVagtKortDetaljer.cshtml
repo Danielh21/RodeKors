@@ -67,10 +67,10 @@
 
                 <div class="col-lg-4">
 
-                    @Html.LabelFor(model => model.AntalVagtleder, htmlAttributes: new { @class = "col-lg-6" })
+                    @Html.LabelFor(model => model.AntalTeamLeder3, htmlAttributes: new { @class = "col-lg-6" })
                     <div class="col-lg-1">
-                        @Html.DropDownListFor(model => model.AntalVagtleder, new SelectList(listofnumbers))
-                        @Html.ValidationMessageFor(model => model.AntalVagtleder, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.AntalTeamLeder3, new SelectList(listofnumbers))
+                        @Html.ValidationMessageFor(model => model.AntalTeamLeder3, "", new { @class = "text-danger" })
                     </div>
 
                     <br />
@@ -84,13 +84,21 @@
                     <br />
                     <br />
 
-                    @Html.LabelFor(model => model.AntalTeamLeder, htmlAttributes: new { @class = "col-lg-6" })
+                    @Html.LabelFor(model => model.AntalTeamLeder2, htmlAttributes: new { @class = "col-lg-6" })
                     <div class="col-sm-1">
-                        @Html.DropDownListFor(model => model.AntalTeamLeder, new SelectList(listofnumbers))
-                        @Html.ValidationMessageFor(model => model.AntalTeamLeder, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.AntalTeamLeder2, new SelectList(listofnumbers))
+                        @Html.ValidationMessageFor(model => model.AntalTeamLeder2, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                    <br />
+                    <br />
 
+                @Html.LabelFor(model => model.AntalTeamLeder1, htmlAttributes: new { @class = "col-lg-6" })
+                <div class="col-sm-1">
+                    @Html.DropDownListFor(model => model.AntalTeamLeder1, new SelectList(listofnumbers))
+                    @Html.ValidationMessageFor(model => model.AntalTeamLeder1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <br />
 
 
 

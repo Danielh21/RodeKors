@@ -154,9 +154,10 @@ namespace Røde_Kors.Controllers
                 vagtkort.Forplejning = model.Forplejning;
                 vagtkort.RødeKorsMaterialer = model.RødeKorsMaterialer;
                 vagtkort.RekvirentMaterialer = model.RekvirentMaterialer;
-                vagtkort.AntalVagtleder = model.AntalVagtleder;
+                vagtkort.AntalTeamLeder3 = model.AntalTeamLeder3;
                 vagtkort.AntalMedics = model.AntalMedics;
-                vagtkort.AntalTeamLeder = model.AntalTeamLeder;
+                vagtkort.AntalTeamLeder2 = model.AntalTeamLeder2;
+                vagtkort.AntalTeamLeder1 = model.AntalTeamLeder1;
                 vagtkort.AntalTeamSamarit = model.AntalTeamSamarit;
                 vagtkort.AntalElev = model.AntalElev;
                 vagtkort.AntalObs = model.AntalObs;
@@ -199,7 +200,6 @@ namespace Røde_Kors.Controllers
         public ActionResult CreateVagtKort()
         {
             VagtKort vagtkort = (VagtKort) Session["Vagtkort"];
-            // Saves the Rekvirent again, and that needs to change!
             context.Entry(vagtkort.Rekvirent).State = EntityState.Detached;
             vagtkort = context.VagtKorts.Add(vagtkort);
             context.SaveChanges();
@@ -218,7 +218,6 @@ namespace Røde_Kors.Controllers
             VagtKort vagtkort = context.VagtKorts.Find(id);
             vagtkort.AssignUsersToList();
             SetUpAvalible(vagtkort);
-            Helper helper = new Helper();
             return View(vagtkort);
         }
 
@@ -253,9 +252,10 @@ namespace Røde_Kors.Controllers
             }
             Helper helper = new Helper();
             Ledige = helper.givVagtString(Ledige);
-            kort.Vagtleder = helper.givVagtString( (List<ApplicationUser>)kort.Vagtleder);
+            kort.TeamLeder3 = helper.givVagtString( (List<ApplicationUser>)kort.TeamLeder3);
             kort.Medics = helper.givVagtString((List<ApplicationUser>)kort.Medics);
-            kort.Teamledere = helper.givVagtString((List<ApplicationUser>)kort.Teamledere);
+            kort.TeamLeder2 = helper.givVagtString((List<ApplicationUser>)kort.TeamLeder2);
+            kort.TeamLeder1 = helper.givVagtString((List<ApplicationUser>)kort.TeamLeder1);
             kort.TeamSamariter = helper.givVagtString((List<ApplicationUser>)kort.TeamSamariter);
             kort.Elever = helper.givVagtString((List<ApplicationUser>)kort.Elever);
             kort.Observertører = helper.givVagtString((List<ApplicationUser>)kort.Observertører);
