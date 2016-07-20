@@ -1,9 +1,209 @@
 ﻿@model Røde_Kors.Models.VagtKort
+@using Røde_Kors.Models
 
 @{
     ViewBag.Title = "AssignUsers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AssignUsers</h2>
+<h2>Dæk vagten!</h2>
+
+<script>
+    $(document).ready(function () {
+
+        $(function () {
+
+            $("#VL").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("1") || ui.item.hasClass("2")) {
+                        cancelEv = false;
+                    }
+                    if (cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+            $("#SamMulig").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+       
+
+            $("#Medic").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("2")) {
+                        cancelEv=false;
+                    }
+                    if (cancelEv) ui.sender.sortable("cancel");
+                    
+                }
+            }).disableSelection();
+
+            $("#TL").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("1") || ui.item.hasClass("2") || ui.item.hasClass("3")) {
+                        cancelEv = false;
+                    }
+                    if(cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+            $("#TS").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("1") || ui.item.hasClass("2") || ui.item.hasClass("3") || ui.item.hasClass("4")) {
+                        cancelEv = false;
+                    }
+                       if(cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+            $("#Elev").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("5")) {
+                        cancelEv = false;
+                    }
+                       if(cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+            $("#Obs").sortable({
+                connectWith: ".connectedSortable",
+                receive: function (event, ui) {
+                    var cancelEv = true;
+                    if (ui.item.hasClass("6")) {
+                        cancelEv = false;
+                    }
+                    if (cancelEv) ui.sender.sortable("cancel");
+                }
+            }).disableSelection();
+
+
+        }
+        );
+    })
+
+
+</script>
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div id="Left-side" class="col-lg-5">
+
+
+            @Html.LabelFor(model => model.AntalVagtleder) - @Html.ValueFor(model => model.AntalVagtleder)
+            <br />
+            
+           <ul multiple id="VL" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+               @foreach (ApplicationUser u in Model.Vagtleder)
+               {
+                   <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter </li>
+               }
+           </ul>
+            <br />
+
+            
+
+                @Html.LabelFor(model => model.AntalMedics) - @Html.ValueFor(model => model.AntalMedics)
+                <br />
+                <ul multiple id="Medic" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                    @foreach (ApplicationUser u in Model.Medics)
+                    {
+                        <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                    }
+                </ul>
+                <br />
+
+                
+
+                    @Html.LabelFor(model => model.AntalTeamLeder) - @Html.ValueFor(model => model.AntalTeamLeder)
+                    <br />
+                    <ul multiple id="TL" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                        @foreach (ApplicationUser u in Model.Teamledere)
+                        {
+                            <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter   </li>
+                        }
+                    </ul>
+                    <br />
+
+                    
+
+                        @Html.LabelFor(model => model.AntalTeamSamarit) - @Html.ValueFor(model => model.AntalTeamSamarit)
+                        <br />
+                        <ul multiple id="TS" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                            @foreach (ApplicationUser u in Model.TeamSamariter)
+                            {
+                                <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+                            }
+                        </ul>
+                        <br />
+
+                        
+
+                            @Html.LabelFor(model => model.AntalElev) - @Html.ValueFor(model => model.AntalElev)
+                            <br />
+                            <ul multiple id="Elev" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                                @foreach (ApplicationUser u in Model.Elever)
+                                {
+                                    <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter   </li>
+                                }
+                            </ul>
+                            <br />
+
+                            
+
+                                @Html.LabelFor(model => model.AntalObs) - @Html.ValueFor(model => model.AntalObs)
+                                <br />
+                                <ul multiple id="Obs" class="list-unstyled connectedSortable" style="min-height:20px; background-color:lightgray">
+                                    @foreach (ApplicationUser u in Model.Observertører)
+                                    {
+                                        <li class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter   </li>
+                                    }
+                                </ul>
+                                <br />
+                            </div>
+                            
+
+
+        <div id="Right-side" class="col-lg-5 col-lg-offset-1">
+
+            Ledige Samaritter
+            <br />
+            <ul multiple class="list-unstyled connectedSortable" id="SamMulig" style="min-height:20px; background-color:lightgray">
+                @foreach(ApplicationUser u in ViewBag.listOfAvalible)
+                {
+                    <li value="@u.Id" class="ui-state-default @u.Rolenumber"> @u.firstName @u.lastName -  ( @u.vagtString ) - Antal Vagter i år: @u.antalVagter  </li>
+
+                }
+
+            </ul>
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+</div>
 

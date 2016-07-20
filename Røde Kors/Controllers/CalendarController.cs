@@ -17,7 +17,7 @@ namespace Røde_Kors.Controllers
     public class CalendarController : Controller
     {
 
-        private CalenderHelper helper = new CalenderHelper();
+        private Helper helper = new Helper();
         private ApplicationUserManager manager;
         private ApplicationUser user;
         private UserStore<ApplicationUser> store;

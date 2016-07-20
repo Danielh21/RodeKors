@@ -41,12 +41,26 @@ namespace Røde_Kors.Models
 
         public string eduLevel { get; set; }
 
+        public int antalVagter { get; set; }
+
         public virtual ICollection<VagtDag> VagtDage { get; set; }
+
+        public virtual ICollection<VagtKortAndUsers> VagtKortApplicationUsers { get; set; }
 
         // Dictoinary is not supported by Entity, but we need it
         // for looking up. See method that converts VagtDage to calendar
         [NotMapped]
         public virtual Dictionary<string,bool> calendarDic { get; set; }
+
+        // Short String for descriping the users diffrent roles for
+        // a specific vagt.
+        [NotMapped]
+        public string vagtString { get; set; }
+
+        // int that is used to sort the users in the list
+        // based on role
+        [NotMapped]
+        public int Rolenumber { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -82,12 +96,37 @@ namespace Røde_Kors.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // Here to write to the fluent API!
+            modelBuilder.Entity<ApplicationUser>().HasKey(q => q.Id).ToTable("dbo.AspNetUsers");
+            modelBuilder.Entity<IdentityUserRole>().HasKey(q => q.RoleId).ToTable("dbo.AspNetUserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(q => q.UserId).ToTable("dbo.AspNetUserLogins");
+            modelBuilder.Entity<IdentityUserClaim>().HasKey(q => q.UserId).ToTable("dbo.AspNetUserClaims");
+
+            modelBuilder.Entity<VagtKort>().HasKey(q => q.VagtKortId);
+            modelBuilder.Entity<VagtKortAndUsers>().HasKey(p =>
+            new {
+                p.ApplicationUserId, p.VagtKortId
+            });
+
+            modelBuilder.Entity<VagtKortAndUsers>()
+                .HasRequired(q => q.VagtKort)
+                .WithMany(q => q.VagtKortApplicationUsers)
+                .HasForeignKey(q => q.VagtKortId);
+
+            modelBuilder.Entity<VagtKortAndUsers>()
+             .HasRequired(t => t.User)
+             .WithMany(t => t.VagtKortApplicationUsers)
+             .HasForeignKey(t => t.ApplicationUserId);
+            
+        }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
-        public static ApplicationDbContext Create()
+            public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
@@ -95,5 +134,7 @@ namespace Røde_Kors.Models
         public System.Data.Entity.DbSet<Røde_Kors.Models.Rekvirent> Rekvirents { get; set; }
 
         public System.Data.Entity.DbSet<Røde_Kors.Models.VagtKort> VagtKorts { get; set; }
+
+        public System.Data.Entity.DbSet<Røde_Kors.Models.VagtKortAndUsers> VagtKortAndUsers { get; set; }
     }
 }

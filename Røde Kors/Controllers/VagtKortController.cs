@@ -215,12 +215,53 @@ namespace Røde_Kors.Controllers
         // At this point the Vagtkort has been created an assigned an ID in the database!
         public ActionResult AssignUsers(int id)
         {
-            //VagtKort vagtkort = context.VagtKorts.Find(id);
-            //List<ApplicationUser> list = context.Users.ToList<ApplicationUser>();
-            //ApplicationUser user = list[0];
-            //context.SaveChanges();
-            //return View(vagtkort);
+            VagtKort vagtkort = context.VagtKorts.Find(id);
+            vagtkort.AssignUsersToList();
+            SetUpAvalible(vagtkort);
+            Helper helper = new Helper();
+            return View(vagtkort);
         }
+
+        // Method for setting up, all the avalible
+        // users and saving it in the session.
+        public void SetUpAvalible(VagtKort kort)
+        {
+            string vagtdag = kort.VagtStart.ToString("yyyy-MM-dd");
+
+            List<ApplicationUser> Ledige = new List<ApplicationUser>();
+
+            List<ApplicationUser> alle = new List<ApplicationUser>();
+
+            alle = context.Users.ToList<ApplicationUser>();
+
+          foreach (ApplicationUser user in alle)
+            {
+                try {
+                Dictionary<string, bool> userCalendar = user.createDictionary();
+                    if (userCalendar[vagtdag])
+                    {
+                        Ledige.Add(user);
+                    }
+                }
+                catch(KeyNotFoundException)
+                {
+                    // Means that the user has not yet set something for this day
+                    // And we wil therefore set the samarit as avalible.
+                    Ledige.Add(user);
+                }
+
+            }
+            Helper helper = new Helper();
+            Ledige = helper.givVagtString(Ledige);
+            kort.Vagtleder = helper.givVagtString( (List<ApplicationUser>)kort.Vagtleder);
+            kort.Medics = helper.givVagtString((List<ApplicationUser>)kort.Medics);
+            kort.Teamledere = helper.givVagtString((List<ApplicationUser>)kort.Teamledere);
+            kort.TeamSamariter = helper.givVagtString((List<ApplicationUser>)kort.TeamSamariter);
+            kort.Elever = helper.givVagtString((List<ApplicationUser>)kort.Elever);
+            kort.Observertører = helper.givVagtString((List<ApplicationUser>)kort.Observertører);
+            ViewBag.listOfAvalible = Ledige;
+        }
+
 
     }
 
